@@ -1,0 +1,131 @@
+/*
+  Futaze design tokens.
+  All values are HSL channel triples (no `hsl()` wrapper) so Tailwind can
+  apply alpha via `hsl(var(--x) / <alpha-value>)`. Never reference raw hex
+  values outside this file.
+*/
+
+:root {
+  /* ---- Light theme (default) ---- */
+  --color-background: 40 33% 97%;
+  --color-surface: 40 25% 94%;
+  --color-surface-elevated: 0 0% 100%;
+  --color-surface-floating: 0 0% 100%;
+  --color-card: 0 0% 100%;
+  --color-border: 30 12% 85%;
+  --color-separator: 30 12% 89%;
+  --color-foreground: 220 14% 10%;
+  --color-muted-foreground: 220 8% 40%;
+
+  --color-accent: 16 100% 58%;
+  --color-accent-foreground: 0 0% 100%;
+  --color-primary: 220 14% 10%;
+  --color-primary-foreground: 40 33% 97%;
+
+  --color-success: 152 55% 32%;
+  --color-warning: 38 85% 45%;
+  --color-danger: 358 70% 50%;
+  --color-focus: 16 100% 58%;
+  --color-selection: 16 100% 90%;
+
+  /* ---- Spacing scale ---- */
+  --space-xs: 0.5rem;   /* 8 */
+  --space-sm: 0.75rem;  /* 12 */
+  --space-md: 1rem;     /* 16 */
+  --space-lg: 1.5rem;   /* 24 */
+  --space-xl: 2rem;     /* 32 */
+  --space-2xl: 2.5rem;  /* 40 */
+  --space-3xl: 4rem;    /* 64 */
+  --space-4xl: 6rem;    /* 96 */
+
+  /* ---- Radius ---- */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-2xl: 32px;
+
+  /* ---- Shadows (subtle, elevation-only) ---- */
+  --shadow-sm: 0 1px 2px hsl(220 14% 10% / 0.06);
+  --shadow-md: 0 4px 16px -4px hsl(220 14% 10% / 0.12);
+  --shadow-lg: 0 12px 32px -8px hsl(220 14% 10% / 0.16);
+  --shadow-xl: 0 24px 64px -12px hsl(220 14% 10% / 0.22);
+
+  /* ---- Motion ---- */
+  --duration-micro: 100ms;
+  --duration-fast: 160ms;
+  --duration-normal: 240ms;
+  --duration-slow: 420ms;
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-emphasized: cubic-bezier(0.2, 0, 0, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* ---- Layout ---- */
+  --container-width: 1600px;
+
+  /* ---- Z-index scale ---- */
+  --z-dropdown: 30;
+  --z-sticky: 40;
+  --z-overlay: 50;
+  --z-modal: 60;
+  --z-toast: 70;
+  --z-tooltip: 80;
+}
+
+[data-theme='dark'] {
+  --color-background: 220 16% 7%;
+  --color-surface: 220 15% 10%;
+  --color-surface-elevated: 220 14% 13%;
+  --color-surface-floating: 220 14% 15%;
+  --color-card: 220 14% 12%;
+  --color-border: 220 10% 20%;
+  --color-separator: 220 10% 18%;
+  --color-foreground: 40 20% 96%;
+  --color-muted-foreground: 220 8% 65%;
+
+  --color-accent: 16 100% 62%;
+  --color-accent-foreground: 220 16% 7%;
+  --color-primary: 40 20% 96%;
+  --color-primary-foreground: 220 16% 7%;
+
+  --color-success: 152 50% 45%;
+  --color-warning: 38 90% 58%;
+  --color-danger: 358 75% 62%;
+  --color-focus: 16 100% 62%;
+  --color-selection: 16 60% 22%;
+
+  --shadow-sm: 0 1px 2px hsl(0 0% 0% / 0.3);
+  --shadow-md: 0 4px 16px -4px hsl(0 0% 0% / 0.4);
+  --shadow-lg: 0 12px 32px -8px hsl(0 0% 0% / 0.5);
+  --shadow-xl: 0 24px 64px -12px hsl(0 0% 0% / 0.6);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --color-background: 220 16% 7%;
+    --color-surface: 220 15% 10%;
+    --color-surface-elevated: 220 14% 13%;
+    --color-surface-floating: 220 14% 15%;
+    --color-card: 220 14% 12%;
+    --color-border: 220 10% 20%;
+    --color-separator: 220 10% 18%;
+    --color-foreground: 40 20% 96%;
+    --color-muted-foreground: 220 8% 65%;
+
+    --color-accent: 16 100% 62%;
+    --color-accent-foreground: 220 16% 7%;
+    --color-primary: 40 20% 96%;
+    --color-primary-foreground: 220 16% 7%;
+
+    --color-success: 152 50% 45%;
+    --color-warning: 38 90% 58%;
+    --color-danger: 358 75% 62%;
+    --color-focus: 16 100% 62%;
+    --color-selection: 16 60% 22%;
+
+    --shadow-sm: 0 1px 2px hsl(0 0% 0% / 0.3);
+    --shadow-md: 0 4px 16px -4px hsl(0 0% 0% / 0.4);
+    --shadow-lg: 0 12px 32px -8px hsl(0 0% 0% / 0.5);
+    --shadow-xl: 0 24px 64px -12px hsl(0 0% 0% / 0.6);
+  }
+}
