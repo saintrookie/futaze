@@ -1,9 +1,11 @@
 import { TrendingUp, TrendingDown } from 'lucide-react';
 import { Grid } from '@shared/ui/primitives/Layout';
 import { Text } from '@shared/ui/atoms/Typography';
+import { useI18n } from '@shared/i18n/LocaleProvider';
 import { cn } from '@shared/lib/cn';
 
 function MetricCard({ label, value, delta, icon }) {
+  const { t } = useI18n();
   const positive = delta != null && delta >= 0;
   return (
     <div className="rounded-xl border border-border bg-surface-elevated p-5">
@@ -17,7 +19,7 @@ function MetricCard({ label, value, delta, icon }) {
       {delta != null && (
         <p className={cn('mt-1.5 flex items-center gap-1 text-xs font-medium', positive ? 'text-success' : 'text-danger')}>
           {positive ? <TrendingUp className="size-3.5" /> : <TrendingDown className="size-3.5" />}
-          {Math.abs(delta)}% vs last period
+          {t('metrics.vsLastPeriod', { delta: Math.abs(delta) })}
         </p>
       )}
     </div>

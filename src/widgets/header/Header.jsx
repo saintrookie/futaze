@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { Menu, Search, Heart, ShoppingBag, ChevronDown, LogOut, LayoutDashboard, ShieldCheck, User } from 'lucide-react';
 import { Container, Inline } from '@shared/ui/primitives/Layout';
@@ -11,10 +11,12 @@ import { Drawer } from '@shared/ui/molecules/Overlay';
 import { ThemeToggle } from '@shared/ui/molecules/ThemeToggle';
 import { LanguageSwitcher } from '@shared/ui/molecules/LanguageSwitcher';
 import { Separator } from '@shared/ui/atoms/Separator';
+import { CommandPalette } from '@widgets/command-palette/CommandPalette';
 import { PRIMARY_NAV, CATEGORY_NAV } from '@shared/constants/nav';
 import { useSession } from '@entities/user';
 import { useFavoritesStore } from '@features/favorite-asset';
 import { useCartStore } from '@features/purchase-asset';
+import { useDisclosure } from '@shared/hooks/useDisclosure';
 import { useI18n } from '@shared/i18n/LocaleProvider';
 import { cn } from '@shared/lib/cn';
 
@@ -26,10 +28,26 @@ export function Header() {
   const { user, signOut } = useSession();
   const favoriteCount = useFavoritesStore((s) => s.ids.length);
   const cartCount = useCartStore((s) => s.items.length);
+  const { isOpen: paletteOpen, open: openPalette, close: closePalette, toggle: togglePalette } = useDisclosure(false);
 
   const submitSearch = (q) => {
     if (q?.trim()) navigate(`/search?q=${encodeURIComponent(q.trim())}`);
   };
+
+  /** ⌘K / Ctrl+K opens the command palette from anywhere Header is mounted, unless focus is already in a text field. */
+  useEffect(() => {
+    const onKeyDown = (e) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+        const tag = document.activeElement?.tagName;
+        const editable = tag === 'INPUT' || tag === 'TEXTAREA' || document.activeElement?.isContentEditable;
+        if (editable) return;
+        e.preventDefault();
+        togglePalette();
+      }
+    };
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, [togglePalette]);
 
   return (
     <header className="sticky top-0 z-sticky border-b border-separator bg-background/85 backdrop-blur-md">
@@ -72,12 +90,20 @@ export function Header() {
             ))}
           </nav>
 
-          <div className="hidden flex-1 md:block max-w-md ml-auto">
-            <SearchInput value={query} onChange={setQuery} onSubmit={submitSearch} size="sm" placeholder={t('common.searchPlaceholder')} />
+          <div className="ml-auto hidden max-w-md flex-1 md:block">
+            <button
+              type="button"
+              onClick={openPalette}
+              className="flex h-10 w-full items-center gap-2 rounded-full border border-border bg-surface-elevated px-4 text-left transition-colors duration-fast hover:border-focus/60"
+            >
+              <Search className="size-4 shrink-0 text-muted" aria-hidden />
+              <span className="flex-1 truncate text-sm text-muted">{t('common.searchPlaceholder')}</span>
+              <kbd className="hidden shrink-0 rounded-sm border border-border px-1.5 py-0.5 text-[10px] font-medium text-muted lg:inline-block">⌘K</kbd>
+            </button>
           </div>
 
           <Inline gap="xs" className="ml-auto md:ml-0 shrink-0">
-            <IconButton label={t('common.search')} className="md:hidden" onClick={() => navigate('/search')}>
+            <IconButton label={t('common.search')} className="md:hidden" onClick={openPalette}>
               <Search />
             </IconButton>
             <LanguageSwitcher className="hidden sm:inline-flex" />
@@ -200,6 +226,8 @@ export function Header() {
           </div>
         </div>
       </Drawer>
+
+      <CommandPalette open={paletteOpen} onClose={closePalette} />
     </header>
   );
 }

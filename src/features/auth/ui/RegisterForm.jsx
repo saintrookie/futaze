@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
+import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { User, Mail, Lock } from 'lucide-react';
@@ -26,8 +26,9 @@ export function RegisterForm() {
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors, isSubmitting },
-  } = useForm({ resolver: zodResolver(schema) });
+  } = useForm({ resolver: zodResolver(schema), defaultValues: { terms: false } });
   const signIn = useSession((s) => s.signIn);
   const navigate = useNavigate();
   const [formError, setFormError] = useState('');
@@ -57,7 +58,7 @@ export function RegisterForm() {
           {(id) => (
             <div className="relative">
               <Mail className="pointer-events-none absolute left-3.5 top-1/2 size-4 -translate-y-1/2 text-muted" />
-              <Input id={id} type="email" className="pl-10" placeholder="you@studio.com" {...register('email')} />
+              <Input id={id} type="email" className="pl-10" placeholder={t('auth.emailPlaceholder')} {...register('email')} />
             </div>
           )}
         </Field>
@@ -65,12 +66,25 @@ export function RegisterForm() {
           {(id) => (
             <div className="relative">
               <Lock className="pointer-events-none absolute left-3.5 top-1/2 size-4 -translate-y-1/2 text-muted" />
-              <Input id={id} type="password" className="pl-10" placeholder="••••••••" {...register('password')} />
+              <Input id={id} type="password" className="pl-10" placeholder={t('auth.passwordPlaceholder')} {...register('password')} />
             </div>
           )}
         </Field>
         <div>
-          <Checkbox label={t('auth.agreeTerms')} {...register('terms')} />
+          <Controller
+            name="terms"
+            control={control}
+            render={({ field }) => (
+              <Checkbox
+                label={t('auth.agreeTerms')}
+                checked={field.value}
+                name={field.name}
+                onChange={(e) => field.onChange(e.target.checked)}
+                onBlur={field.onBlur}
+                ref={field.ref}
+              />
+            )}
+          />
           {errors.terms && (
             <Text size="xs" className="mt-1.5 text-danger" role="alert">
               {errors.terms.message}

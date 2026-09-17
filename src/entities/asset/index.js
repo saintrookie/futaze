@@ -1,4 +1,5 @@
 export { AssetCard } from './ui/AssetCard';
+export { AssetListRow } from './ui/AssetListRow';
 export { AssetThumbnail } from './ui/AssetThumbnail';
 export { AssetMeta } from './ui/AssetMeta';
 export { AssetPrice } from './ui/AssetPrice';

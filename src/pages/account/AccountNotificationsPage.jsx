@@ -2,11 +2,13 @@ import { Bell } from 'lucide-react';
 import { EmptyState } from '@shared/ui/patterns/EmptyState';
 import { Text } from '@shared/ui/atoms/Typography';
 import { NOTIFICATIONS } from '@entities/notification';
+import { useI18n } from '@shared/i18n/LocaleProvider';
 import { cn } from '@shared/lib/cn';
 
 export default function AccountNotificationsPage() {
+  const { t } = useI18n();
   if (NOTIFICATIONS.length === 0) {
-    return <EmptyState icon={<Bell />} title="No notifications" description="Purchase confirmations, payouts, and moderation updates will show up here." />;
+    return <EmptyState icon={<Bell />} title={t('account.noNotificationsTitle')} description={t('account.noNotificationsDescription')} />;
   }
 
   return (

@@ -19,6 +19,14 @@ export default {
     addToCart: 'Add to cart',
     buyLicense: 'Buy license',
     menu: 'Menu',
+    manage: 'Manage',
+    review: 'Review',
+    edit: 'Edit',
+    view: 'View',
+    approve: 'Approve',
+    reject: 'Reject',
+    clearSearch: 'Clear search',
+    breadcrumb: 'Breadcrumb',
   },
 
   nav: {
@@ -37,6 +45,27 @@ export default {
     language: 'Language',
     switchToDark: 'Switch to dark theme',
     switchToLight: 'Switch to light theme',
+  },
+
+  commandPalette: {
+    placeholder: 'Search assets, creators, or jump to a page…',
+    quickActionsLabel: 'Quick actions',
+    recentlyViewedLabel: 'Recently viewed',
+    categoriesLabel: 'Browse categories',
+    assetsLabel: 'Assets',
+    creatorsLabel: 'Creators',
+    viewAllResults: 'View all results for "{{query}}"',
+    noResultsTitle: 'No matches yet',
+    noResultsDescription: 'Try a different word, or browse all results.',
+  },
+
+  mobileNav: {
+    navLabel: 'Primary',
+    home: 'Home',
+    explore: 'Explore',
+    search: 'Search',
+    collections: 'Collections',
+    account: 'Account',
   },
 
   accountNav: {
@@ -95,6 +124,8 @@ export default {
   },
 
   home: {
+    continueExploringEyebrow: 'Pick up where you left off',
+    continueExploringTitle: 'Continue exploring',
     trendingEyebrow: 'Right now',
     trendingTitle: 'Trending assets',
     trendingDescription: 'What creative teams are licensing most this week.',
@@ -152,11 +183,14 @@ export default {
     filterMin: 'Min',
     filterMax: 'Max',
     clearFilters: 'Clear all filters',
+    removeFilter: 'Remove {{label}} filter',
     orientationLandscape: 'Landscape',
     orientationPortrait: 'Portrait',
     orientationSquare: 'Square',
     noResultsTitle: 'No assets found',
     noResultsDescription: 'Try adjusting your filters or search terms to find what you’re looking for.',
+    gridView: 'Grid view',
+    listView: 'List view',
   },
 
   emptyState: {
@@ -228,6 +262,8 @@ export default {
     fieldConfirmPassword: 'Confirm password',
     fieldPasswordHint: 'At least 8 characters.',
     fieldNamePlaceholder: 'Jordan Blake',
+    emailPlaceholder: 'you@studio.com',
+    passwordPlaceholder: '••••••••',
     loginError: 'We could not sign you in. Please try again.',
     registerError: 'We could not create your account. Please try again.',
     createAccount: 'Create account',
@@ -300,6 +336,12 @@ export default {
     unavailableTitle: 'Asset unavailable',
     unavailableDescription: 'This asset may have been removed or archived by its creator.',
     marketplace: 'Marketplace',
+    viewFullscreen: 'View fullscreen',
+    closeFullscreen: 'Close fullscreen',
+    zoomIn: 'Zoom in',
+    zoomOut: 'Zoom out',
+    ratedOutOf: 'Rated {{value}} out of 5',
+    ratedOutOfWithCount: 'Rated {{value}} out of 5 from {{count}} reviews',
   },
 
   license: {
@@ -396,6 +438,211 @@ export default {
     next: 'Next page',
   },
 
+  table: {
+    searchPlaceholder: 'Search…',
+    noneFoundTitle: 'Nothing here yet',
+    columnName: 'Name',
+    columnEmail: 'Email',
+    columnRole: 'Role',
+    columnStatus: 'Status',
+    columnJoined: 'Joined',
+    columnCreator: 'Creator',
+    columnUsername: 'Username',
+    columnAssets: 'Assets',
+    columnFollowers: 'Followers',
+    columnTitle: 'Title',
+    columnAsset: 'Asset',
+    columnCategory: 'Category',
+    columnDownloads: 'Downloads',
+    columnPrice: 'Price',
+    columnOrder: 'Order',
+    columnLicense: 'License',
+    columnAmount: 'Amount',
+    columnDate: 'Date',
+    columnReporter: 'Reporter',
+    columnReason: 'Reason',
+    columnPayout: 'Payout',
+    columnRevenue: 'Revenue',
+    columnVersion: 'Version',
+    columnDownloaded: 'Downloaded',
+    selectedCount: '{{count}} selected',
+    clearSelection: 'Clear selection',
+    selectAll: 'Select all rows on this page',
+    selectRow: 'Select row',
+    comfortable: 'Comfortable density',
+    compact: 'Compact density',
+  },
+
+  account: {
+    recentPurchases: 'Recent purchases',
+    noPurchasesTitle: 'No purchases yet',
+    noPurchasesDescription: 'Assets you buy will show up here with their order details and license.',
+    redownload: 'Re-download',
+    noDownloadsTitle: 'No downloads yet',
+    noDownloadsDescription: 'Files from your purchases will appear here, available to re-download at any time.',
+    noCollectionsTitle: 'No collections yet',
+    noCollectionsDescription: 'Create a collection from any asset page to start organizing your favorites into moodboards or projects.',
+    noNotificationsTitle: 'No notifications',
+    noNotificationsDescription: 'Purchase confirmations, payouts, and moderation updates will show up here.',
+  },
+
+  collection: {
+    private: 'Private',
+    public: 'Public',
+  },
+
+  metrics: {
+    vsLastPeriod: '{{delta}}% vs last period',
+  },
+
+  adminDashboard: {
+    gmv: 'GMV (30d)',
+    orders: 'Orders (30d)',
+    activeUsers: 'Active users',
+    publishedAssets: 'Published assets',
+    gmvChartTitle: 'Gross merchandise value',
+    gmvChartSubtitle: 'Last 8 months, platform-wide',
+    needsAttentionTitle: 'Needs attention',
+    moderationQueueCount_one: '{{count}} asset awaiting review',
+    moderationQueueCount_other: '{{count}} assets awaiting review',
+    openReportsCount_one: '{{count}} open report',
+    openReportsCount_other: '{{count}} open reports',
+  },
+
+  adminUsers: {
+    emptyTitle: 'No users found',
+    activate: 'Activate',
+    suspend: 'Suspend',
+  },
+
+  adminCreators: {
+    verified: 'Verified',
+    unverified: 'Unverified',
+  },
+
+  adminModeration: {
+    queueClearTitle: 'Queue is clear',
+    queueClearDescription: 'No assets are currently awaiting moderation review.',
+    submittedBy: 'by {{creator}} · submitted {{date}}',
+  },
+
+  adminReports: {
+    emptyTitle: 'No reports',
+    emptyDescription: 'User-submitted content reports will appear here.',
+  },
+
+  creatorHome: {
+    revenue: 'Revenue (30d)',
+    downloads: 'Downloads (30d)',
+    views: 'Views (30d)',
+    favorites: 'Favorites (30d)',
+    earningsChartTitle: 'Earnings trend',
+    earningsChartSubtitle: 'Last 8 months',
+    topAssetsTitle: 'Your top assets',
+    topAssetsEmpty: 'Publish your first asset to see performance here.',
+    nextPayoutTitle: 'Available balance',
+    nextPayoutAmount: '{{amount}} available now',
+    nextPayoutDate: 'Pays out on {{date}}',
+    viewEarnings: 'View earnings',
+  },
+
+  creatorAssets: {
+    uploadNew: 'Upload new',
+    emptyTitle: 'No assets published',
+    emptyDescription: 'Upload your first asset to start earning from your work.',
+  },
+
+  creatorAnalytics: {
+    totalViews: 'Total views',
+    clickThroughRate: 'Click-through rate',
+    conversionRate: 'Conversion rate',
+    viewsChartTitle: 'Views over time',
+    viewsChartSubtitle: 'Last 8 weeks',
+    conversionChartTitle: 'Conversion rate',
+    conversionChartSubtitle: 'Percentage of views that led to a purchase',
+  },
+
+  creatorEarnings: {
+    availableBalance: 'Available balance',
+    pendingBalance: 'Pending balance',
+    lifetimeEarnings: 'Lifetime earnings',
+    trendTitle: 'Earnings trend',
+    nextPayout: 'Next payout on {{date}}',
+    revenueByAssetTitle: 'Revenue by asset',
+  },
+
+  creatorPayouts: {
+    emptyTitle: 'No payouts yet',
+    emptyDescription: 'Once you have a positive balance, payouts will appear here on your monthly cycle.',
+  },
+
+  creatorUpload: {
+    title: 'Upload assets',
+    description: 'Files are processed automatically — previews, metadata, and moderation submission happen without blocking you.',
+    dropHint: 'Drag & drop files, or',
+    browse: 'browse',
+    supportedFormats: 'Supports large files with resumable, multi-file upload. JPG, PNG, TIFF, MP4, WAV, SVG, AI, OBJ, and more.',
+    cancelUpload: 'Cancel upload',
+    stageUploading: 'Uploading',
+    stageProcessing: 'Processing (generating previews & extracting metadata)',
+    stageDraft: 'Ready — saved as draft',
+  },
+
+  about: {
+    eyebrow: 'About Futaze',
+    title: 'Built for the people who make the work',
+    paragraph1: 'Futaze is a marketplace for creative assets — photography, footage, illustration, audio, and design — built around a simple premise: the people who make the work should be able to make a living from it.',
+    paragraph2: 'We started Futaze because too many marketplaces treat creative work as inventory. We built ours around transparent licensing, fair revenue share, and a discovery experience that respects both the person searching and the person who made what they find. Every asset on Futaze is reviewed before publication, every license is written in plain language, and every creator can see exactly what they’ve earned and when they’ll be paid.',
+    paragraph3: 'Today, thousands of independent creators publish on Futaze, and teams of every size — from solo freelancers to enterprise brand teams — license their work for campaigns, products, and stories told around the world.',
+  },
+
+  contact: {
+    eyebrow: 'Contact',
+    title: 'Talk to us',
+    description: 'Questions about licensing, an order, or partnering with us — we typically respond within one business day.',
+    channelEmailTitle: 'Email support',
+    channelEmailDetail: 'support@futaze.example',
+    channelChatTitle: 'Live chat',
+    channelChatDetail: 'Available weekdays, 9am–6pm',
+    channelEnterpriseTitle: 'Enterprise sales',
+    channelEnterpriseDetail: 'sales@futaze.example',
+    fieldName: 'Name',
+    fieldSubject: 'Subject',
+    fieldMessage: 'Message',
+    send: 'Send message',
+    sentTitle: 'Message sent',
+    sentDescription: 'We’ll get back to you shortly.',
+  },
+
+  legal: {
+    termsTitle: 'Terms of Service',
+    termsUpdated: 'Last updated September 2025',
+    termsBody: [
+      'By using Futaze, you agree to license (not purchase outright) the digital assets available on the platform, subject to the license tier selected at checkout.',
+      'Creators retain copyright of their work. Purchasing a license grants usage rights as described for that tier — it does not transfer ownership.',
+      'Misuse of downloaded assets outside the granted license terms may result in license revocation and account suspension.',
+    ],
+    privacyTitle: 'Privacy Policy',
+    privacyUpdated: 'Last updated September 2025',
+    privacyBody: [
+      'We collect the information necessary to operate your account, process payments, and deliver licensed downloads securely.',
+      'We never sell your personal data. Analytics events are used in aggregate to improve search relevance and platform performance.',
+      'You can request a copy or deletion of your data at any time from Account → Settings.',
+    ],
+  },
+
+  faq: {
+    eyebrow: 'FAQ',
+    title: 'Frequently asked questions',
+    items: [
+      { q: 'What can I do with a Commercial license?', a: 'The Commercial license covers most client and business use — web, social, and print — for one end product, up to 500,000 impressions. See the full breakdown on the Pricing page.' },
+      { q: 'Can I resell or redistribute assets I download?', a: 'Not under Personal or Commercial licenses. If you need merchandise or resale rights, choose the Extended license, which is built for exactly that.' },
+      { q: 'How do creator payouts work?', a: 'Creators earn a share of every completed, non-refunded sale of their work, visible in real time from their dashboard. Payouts run monthly to a connected payout method.' },
+      { q: 'What happens if I refund an order?', a: 'Refunds reverse future download authorization for that item, but anything already downloaded remains usable under the terms already granted — we don’t revoke work already in progress.' },
+      { q: 'How is my content moderated as a creator?', a: 'Every upload passes through review before publishing. You can track its status — draft, under review, approved, or published — from your creator dashboard at any time.' },
+    ],
+  },
+
   download: {
     default: 'Download',
     authorizing: 'Authorizing…',
@@ -442,6 +689,9 @@ export default {
   checkout: {
     title: 'Checkout',
     paymentDetails: 'Payment details',
+    cardNumberPlaceholder: 'Card number',
+    expiryPlaceholder: 'MM / YY',
+    cvcPlaceholder: 'CVC',
     demoNotice: 'This is a demo checkout — no payment is actually processed.',
     couponPlaceholder: 'Coupon code',
     apply: 'Apply',

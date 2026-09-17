@@ -2,11 +2,17 @@ import { cn } from '@shared/lib/cn';
 import { Heading, Text } from '@shared/ui/atoms/Typography';
 import { Button } from '@shared/ui/atoms/Button';
 
-export function EmptyState({ icon, title, description, action, secondaryAction, className }) {
+const TONE_ICON_CLASS = {
+  neutral: 'bg-surface text-muted',
+  success: 'bg-success/10 text-success',
+  danger: 'bg-danger/10 text-danger',
+};
+
+export function EmptyState({ icon, title, description, action, secondaryAction, tone = 'neutral', className }) {
   return (
     <div className={cn('flex flex-col items-center justify-center gap-4 rounded-xl border border-dashed border-border px-6 py-16 text-center', className)}>
       {icon && (
-        <span className="flex size-14 items-center justify-center rounded-full bg-surface text-muted [&>svg]:size-6" aria-hidden>
+        <span className={cn('flex size-14 items-center justify-center rounded-full [&>svg]:size-6', TONE_ICON_CLASS[tone] || TONE_ICON_CLASS.neutral)} aria-hidden>
           {icon}
         </span>
       )}

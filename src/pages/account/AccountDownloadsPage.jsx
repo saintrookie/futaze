@@ -3,8 +3,10 @@ import { Button } from '@shared/ui/atoms/Button';
 import { DataTable } from '@widgets/data-table/DataTable';
 import { DOWNLOADS } from '@entities/order';
 import { getLicense } from '@entities/license/model/licenses';
+import { useI18n } from '@shared/i18n/LocaleProvider';
 
 export default function AccountDownloadsPage() {
+  const { t } = useI18n();
   const rows = DOWNLOADS.map((d) => ({
     id: d.id,
     title: d.asset.title,
@@ -18,19 +20,19 @@ export default function AccountDownloadsPage() {
     <DataTable
       searchKeys={['title']}
       columns={[
-        { key: 'title', label: 'Asset' },
-        { key: 'license', label: 'License' },
-        { key: 'version', label: 'Version' },
-        { key: 'date', label: 'Downloaded' },
+        { key: 'title', label: t('table.columnAsset') },
+        { key: 'license', label: t('table.columnLicense') },
+        { key: 'version', label: t('table.columnVersion') },
+        { key: 'date', label: t('table.columnDownloaded') },
       ]}
       rows={rows}
       rowActions={() => (
         <Button variant="secondary" size="xs" iconLeft={<Download />}>
-          Re-download
+          {t('account.redownload')}
         </Button>
       )}
-      emptyTitle="No downloads yet"
-      emptyDescription="Files from your purchases will appear here, available to re-download at any time."
+      emptyTitle={t('account.noDownloadsTitle')}
+      emptyDescription={t('account.noDownloadsDescription')}
     />
   );
 }

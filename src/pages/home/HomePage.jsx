@@ -11,12 +11,19 @@ import { Button } from '@shared/ui/atoms/Button';
 import { LazyImage } from '@shared/ui/atoms/LazyImage';
 import { CollectionCard, COLLECTIONS } from '@entities/collection';
 import { CreatorCard, fetchFeaturedCreators } from '@entities/creator';
-import { fetchTrendingAssets, fetchNewArrivals, fetchAssetsByCategory, useLocalizedAssets } from '@entities/asset';
+import { fetchTrendingAssets, fetchNewArrivals, fetchAssetsByCategory, fetchAssetsByIds, useLocalizedAssets } from '@entities/asset';
+import { useRecentlyViewed } from '@features/recently-viewed';
 import { useI18n } from '@shared/i18n/LocaleProvider';
 import { Link } from 'react-router-dom';
 
 export default function HomePage() {
   const { t } = useI18n();
+  const { ids: recentlyViewedIds } = useRecentlyViewed();
+  const recentlyViewed = useQuery({
+    queryKey: ['home-recently-viewed', recentlyViewedIds],
+    queryFn: () => fetchAssetsByIds(recentlyViewedIds),
+    enabled: recentlyViewedIds.length > 0,
+  });
   const trending = useQuery({ queryKey: ['home-trending'], queryFn: () => fetchTrendingAssets(12) });
   const newArrivals = useQuery({ queryKey: ['home-new'], queryFn: () => fetchNewArrivals(12) });
   const videos = useQuery({ queryKey: ['home-videos'], queryFn: () => fetchAssetsByCategory('footage', { limit: 8 }) });
@@ -31,6 +38,15 @@ export default function HomePage() {
   return (
     <>
       <Hero />
+
+      {recentlyViewedIds.length > 0 && (
+        <RecommendationSection
+          eyebrow={t('home.continueExploringEyebrow')}
+          title={t('home.continueExploringTitle')}
+          assets={recentlyViewed.data}
+          loading={recentlyViewed.isLoading}
+        />
+      )}
 
       <RecommendationSection
         eyebrow={t('home.trendingEyebrow')}

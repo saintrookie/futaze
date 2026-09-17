@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { m } from 'framer-motion';
 import { Heart, Plus } from 'lucide-react';
 import { AssetThumbnail } from '@entities/asset/ui/AssetThumbnail';
 import { AssetMeta } from '@entities/asset/ui/AssetMeta';
@@ -6,6 +7,8 @@ import { AssetPrice } from '@entities/asset/ui/AssetPrice';
 import { AiGeneratedBadge } from '@entities/asset/ui/AssetBadge';
 import { useLocalizedAsset } from '@entities/asset/model/useLocalizedAsset';
 import { useI18n } from '@shared/i18n/LocaleProvider';
+import { usePrefersReducedMotion } from '@shared/hooks/useMediaQuery';
+import { hoverLift } from '@shared/lib/motion';
 import { cn } from '@shared/lib/cn';
 
 /**
@@ -26,8 +29,9 @@ export function AssetCard({
 }) {
   const asset = useLocalizedAsset(rawAsset);
   const { t } = useI18n();
+  const reduced = usePrefersReducedMotion();
   return (
-    <article className={cn('group relative flex flex-col gap-2.5', className)}>
+    <m.article className={cn('group relative flex flex-col gap-2.5', className)} {...hoverLift(reduced)}>
       <Link to={`/asset/${asset.slug}`} className="relative block" aria-label={asset.title}>
         <AssetThumbnail asset={asset} eager={eager} />
         <div className="pointer-events-none absolute inset-x-2.5 top-2.5 flex items-start justify-between">
@@ -76,6 +80,6 @@ export function AssetCard({
         </div>
         <AssetPrice asset={asset} className="shrink-0 pt-0.5" />
       </div>
-    </article>
+    </m.article>
   );
 }

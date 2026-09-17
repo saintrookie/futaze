@@ -35,3 +35,11 @@ export function fetchAssetsByCreator(creatorId, { excludeId, limit = 12 } = {}) 
 export function fetchAssetsByCategory(categorySlug, { limit = 12 } = {}) {
   return request(() => ASSETS.filter((a) => a.categorySlug === categorySlug).slice(0, limit));
 }
+
+/** Preserves the order of `ids` (most-recent-first for recently-viewed use). */
+export function fetchAssetsByIds(ids = [], { limit } = {}) {
+  return request(() => {
+    const found = ids.map((id) => ASSETS.find((a) => a.id === id)).filter(Boolean);
+    return limit ? found.slice(0, limit) : found;
+  });
+}

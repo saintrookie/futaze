@@ -1,5 +1,8 @@
 import { forwardRef, useId } from 'react';
 import { Check, ChevronDown } from 'lucide-react';
+import * as CheckboxPrimitive from '@radix-ui/react-checkbox';
+import * as RadioGroupPrimitive from '@radix-ui/react-radio-group';
+import * as SwitchPrimitive from '@radix-ui/react-switch';
 import { cn } from '@shared/lib/cn';
 
 const fieldBase =
@@ -84,46 +87,79 @@ export const Select = forwardRef(function Select({ className, error, size = 'md'
   );
 });
 
-export const Checkbox = forwardRef(function Checkbox({ className, label, id, ...props }, ref) {
+/**
+ * Checkbox/Radio/Switch are built on Radix primitives (already installed
+ * deps, previously unused) rather than hand-rolled sr-only-input + peer-*
+ * CSS. External API is preserved: `onChange` still receives a
+ * native-shaped `{ target: { checked, name } }` event, so existing
+ * consumers reading `e.target.checked` (e.g. AccountSettingsPage) keep
+ * working unchanged. `Radio` is now a `RadioGroup`-based single-select
+ * (matches how consumers like FilterPanel already model state — one
+ * selected value, not independent booleans per option).
+ */
+
+export const Checkbox = forwardRef(function Checkbox({ className, label, id, onChange, name, ...props }, ref) {
   const autoId = useId();
   const inputId = id || autoId;
   return (
     <label htmlFor={inputId} className={cn('inline-flex items-center gap-2.5 cursor-pointer select-none', className)}>
-      <span className="relative inline-flex size-5 shrink-0">
-        <input ref={ref} id={inputId} type="checkbox" className="peer sr-only" {...props} />
-        <span className="size-5 rounded-[6px] border border-border bg-surface-elevated transition-colors duration-fast peer-checked:bg-accent peer-checked:border-accent peer-focus-visible:ring-2 peer-focus-visible:ring-focus peer-focus-visible:ring-offset-2 peer-focus-visible:ring-offset-background" />
-        <Check className="pointer-events-none absolute inset-0 m-auto size-3.5 text-accent-foreground opacity-0 peer-checked:opacity-100 transition-opacity duration-fast" />
-      </span>
+      <CheckboxPrimitive.Root
+        ref={ref}
+        id={inputId}
+        name={name}
+        onCheckedChange={(checked) => onChange?.({ target: { checked, name, type: 'checkbox' } })}
+        className="flex size-5 shrink-0 items-center justify-center rounded-[6px] border border-border bg-surface-elevated transition-colors duration-fast data-[state=checked]:bg-accent data-[state=checked]:border-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:opacity-50 disabled:cursor-not-allowed"
+        {...props}
+      >
+        <CheckboxPrimitive.Indicator>
+          <Check className="size-3.5 text-accent-foreground" />
+        </CheckboxPrimitive.Indicator>
+      </CheckboxPrimitive.Root>
       {label && <span className="text-sm text-foreground">{label}</span>}
     </label>
   );
 });
 
-export const Radio = forwardRef(function Radio({ className, label, id, ...props }, ref) {
+export const RadioGroup = forwardRef(function RadioGroup({ className, ...props }, ref) {
+  return <RadioGroupPrimitive.Root ref={ref} className={cn('flex flex-col gap-2.5', className)} {...props} />;
+});
+
+export const Radio = forwardRef(function Radio({ className, label, value, id, ...props }, ref) {
   const autoId = useId();
   const inputId = id || autoId;
   return (
     <label htmlFor={inputId} className={cn('inline-flex items-center gap-2.5 cursor-pointer select-none', className)}>
-      <span className="relative inline-flex size-5 shrink-0">
-        <input ref={ref} id={inputId} type="radio" className="peer sr-only" {...props} />
-        <span className="size-5 rounded-full border border-border bg-surface-elevated transition-colors duration-fast peer-checked:border-accent peer-focus-visible:ring-2 peer-focus-visible:ring-focus peer-focus-visible:ring-offset-2 peer-focus-visible:ring-offset-background" />
-        <span className="pointer-events-none absolute inset-0 m-auto size-2.5 scale-0 rounded-full bg-accent transition-transform duration-fast peer-checked:scale-100" />
-      </span>
+      <RadioGroupPrimitive.Item
+        ref={ref}
+        id={inputId}
+        value={value}
+        className="flex size-5 shrink-0 items-center justify-center rounded-full border border-border bg-surface-elevated transition-colors duration-fast data-[state=checked]:border-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:opacity-50 disabled:cursor-not-allowed"
+        {...props}
+      >
+        <RadioGroupPrimitive.Indicator className="flex items-center justify-center">
+          <span className="size-2.5 rounded-full bg-accent" />
+        </RadioGroupPrimitive.Indicator>
+      </RadioGroupPrimitive.Item>
       {label && <span className="text-sm text-foreground">{label}</span>}
     </label>
   );
 });
 
-export const Switch = forwardRef(function Switch({ className, label, id, ...props }, ref) {
+export const Switch = forwardRef(function Switch({ className, label, id, onChange, name, ...props }, ref) {
   const autoId = useId();
   const inputId = id || autoId;
   return (
     <label htmlFor={inputId} className={cn('inline-flex items-center gap-2.5 cursor-pointer select-none', className)}>
-      <span className="relative inline-flex h-6 w-10 shrink-0">
-        <input ref={ref} id={inputId} type="checkbox" role="switch" className="peer sr-only" {...props} />
-        <span className="h-6 w-10 rounded-full bg-surface border border-border transition-colors duration-fast peer-checked:bg-accent peer-checked:border-accent peer-focus-visible:ring-2 peer-focus-visible:ring-focus peer-focus-visible:ring-offset-2 peer-focus-visible:ring-offset-background" />
-        <span className="pointer-events-none absolute left-0.5 top-0.5 size-4 translate-x-0 rounded-full bg-white shadow-sm transition-transform duration-fast peer-checked:translate-x-4" />
-      </span>
+      <SwitchPrimitive.Root
+        ref={ref}
+        id={inputId}
+        name={name}
+        onCheckedChange={(checked) => onChange?.({ target: { checked, name, type: 'checkbox' } })}
+        className="relative h-6 w-10 shrink-0 rounded-full border border-border bg-surface transition-colors duration-fast data-[state=checked]:bg-accent data-[state=checked]:border-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:opacity-50 disabled:cursor-not-allowed"
+        {...props}
+      >
+        <SwitchPrimitive.Thumb className="block size-4 translate-x-0.5 rounded-full bg-white shadow-sm transition-transform duration-fast data-[state=checked]:translate-x-4" />
+      </SwitchPrimitive.Root>
       {label && <span className="text-sm text-foreground">{label}</span>}
     </label>
   );

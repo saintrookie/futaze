@@ -2,8 +2,10 @@ import { Badge } from '@shared/ui/atoms/Badge';
 import { Button } from '@shared/ui/atoms/Button';
 import { DataTable } from '@widgets/data-table/DataTable';
 import { CREATORS } from '@entities/creator';
+import { useI18n } from '@shared/i18n/LocaleProvider';
 
 export default function AdminCreatorsPage() {
+  const { t } = useI18n();
   const rows = CREATORS.map((c) => ({
     id: c.id,
     name: c.name,
@@ -17,20 +19,24 @@ export default function AdminCreatorsPage() {
     <DataTable
       searchKeys={['name', 'username']}
       columns={[
-        { key: 'name', label: 'Creator' },
-        { key: 'username', label: 'Username' },
-        { key: 'assets', label: 'Assets' },
-        { key: 'followers', label: 'Followers' },
+        { key: 'name', label: t('table.columnCreator') },
+        { key: 'username', label: t('table.columnUsername') },
+        { key: 'assets', label: t('table.columnAssets') },
+        { key: 'followers', label: t('table.columnFollowers') },
         {
           key: 'verified',
-          label: 'Status',
-          render: (row) => <Badge variant={row.verified ? 'success' : 'neutral'}>{row.verified ? 'Verified' : 'Unverified'}</Badge>,
+          label: t('table.columnStatus'),
+          render: (row) => (
+            <Badge variant={row.verified ? 'success' : 'neutral'}>
+              {row.verified ? t('adminCreators.verified') : t('adminCreators.unverified')}
+            </Badge>
+          ),
         },
       ]}
       rows={rows}
       rowActions={() => (
         <Button variant="ghost" size="xs">
-          Manage
+          {t('common.manage')}
         </Button>
       )}
     />

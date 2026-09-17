@@ -3,16 +3,18 @@ import { Grid } from '@shared/ui/primitives/Layout';
 import { EmptyState } from '@shared/ui/patterns/EmptyState';
 import { CollectionCard } from '@entities/collection';
 import { useCollectionsStore } from '@features/add-to-collection';
+import { useI18n } from '@shared/i18n/LocaleProvider';
 
 export default function AccountCollectionsPage() {
+  const { t } = useI18n();
   const collections = useCollectionsStore((s) => s.collections);
 
   if (collections.length === 0) {
     return (
       <EmptyState
         icon={<FolderHeart />}
-        title="No collections yet"
-        description="Create a collection from any asset page to start organizing your favorites into moodboards or projects."
+        title={t('account.noCollectionsTitle')}
+        description={t('account.noCollectionsDescription')}
       />
     );
   }

@@ -1,7 +1,9 @@
 import { X, ChevronDown } from 'lucide-react';
 import { cn } from '@shared/lib/cn';
+import { useI18n } from '@shared/i18n/LocaleProvider';
 
 export function FilterChip({ label, active = false, onClick, onRemove, expandable = false, className }) {
+  const { t } = useI18n();
   return (
     <button
       type="button"
@@ -21,7 +23,7 @@ export function FilterChip({ label, active = false, onClick, onRemove, expandabl
         <span
           role="button"
           tabIndex={-1}
-          aria-label={`Remove ${label} filter`}
+          aria-label={t('browse.removeFilter', { label })}
           onClick={(e) => {
             e.stopPropagation();
             onRemove();

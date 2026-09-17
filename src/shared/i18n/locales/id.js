@@ -19,6 +19,14 @@ export default {
     addToCart: 'Tambah ke keranjang',
     buyLicense: 'Beli lisensi',
     menu: 'Menu',
+    manage: 'Kelola',
+    review: 'Tinjau',
+    edit: 'Edit',
+    view: 'Lihat',
+    approve: 'Setujui',
+    reject: 'Tolak',
+    clearSearch: 'Hapus pencarian',
+    breadcrumb: 'Remah roti',
   },
 
   nav: {
@@ -37,6 +45,27 @@ export default {
     language: 'Bahasa',
     switchToDark: 'Ganti ke tema gelap',
     switchToLight: 'Ganti ke tema terang',
+  },
+
+  commandPalette: {
+    placeholder: 'Cari aset, kreator, atau buka halaman…',
+    quickActionsLabel: 'Aksi cepat',
+    recentlyViewedLabel: 'Baru dilihat',
+    categoriesLabel: 'Jelajahi kategori',
+    assetsLabel: 'Aset',
+    creatorsLabel: 'Kreator',
+    viewAllResults: 'Lihat semua hasil untuk "{{query}}"',
+    noResultsTitle: 'Belum ada yang cocok',
+    noResultsDescription: 'Coba kata lain, atau jelajahi semua hasil.',
+  },
+
+  mobileNav: {
+    navLabel: 'Navigasi utama',
+    home: 'Beranda',
+    explore: 'Jelajahi',
+    search: 'Cari',
+    collections: 'Koleksi',
+    account: 'Akun',
   },
 
   accountNav: {
@@ -95,6 +124,8 @@ export default {
   },
 
   home: {
+    continueExploringEyebrow: 'Lanjutkan dari terakhir kali',
+    continueExploringTitle: 'Lanjutkan menjelajah',
     trendingEyebrow: 'Saat ini',
     trendingTitle: 'Aset sedang tren',
     trendingDescription: 'Aset yang paling banyak dilisensikan tim kreatif minggu ini.',
@@ -152,11 +183,14 @@ export default {
     filterMin: 'Min',
     filterMax: 'Maks',
     clearFilters: 'Hapus semua filter',
+    removeFilter: 'Hapus filter {{label}}',
     orientationLandscape: 'Lanskap',
     orientationPortrait: 'Potret',
     orientationSquare: 'Persegi',
     noResultsTitle: 'Tidak ada aset ditemukan',
     noResultsDescription: 'Coba sesuaikan filter atau kata pencarian Anda untuk menemukan yang Anda cari.',
+    gridView: 'Tampilan grid',
+    listView: 'Tampilan daftar',
   },
 
   emptyState: {
@@ -228,6 +262,8 @@ export default {
     fieldConfirmPassword: 'Konfirmasi kata sandi',
     fieldPasswordHint: 'Minimal 8 karakter.',
     fieldNamePlaceholder: 'Jordan Blake',
+    emailPlaceholder: 'you@studio.com',
+    passwordPlaceholder: '••••••••',
     loginError: 'Kami tidak dapat memproses masuk Anda. Silakan coba lagi.',
     registerError: 'Kami tidak dapat membuat akun Anda. Silakan coba lagi.',
     createAccount: 'Buat akun',
@@ -300,6 +336,12 @@ export default {
     unavailableTitle: 'Aset tidak tersedia',
     unavailableDescription: 'Aset ini mungkin telah dihapus atau diarsipkan oleh kreatornya.',
     marketplace: 'Marketplace',
+    viewFullscreen: 'Lihat layar penuh',
+    closeFullscreen: 'Tutup layar penuh',
+    zoomIn: 'Perbesar',
+    zoomOut: 'Perkecil',
+    ratedOutOf: 'Dinilai {{value}} dari 5',
+    ratedOutOfWithCount: 'Dinilai {{value}} dari 5 berdasarkan {{count}} ulasan',
   },
 
   license: {
@@ -396,6 +438,211 @@ export default {
     next: 'Halaman berikutnya',
   },
 
+  table: {
+    searchPlaceholder: 'Cari…',
+    noneFoundTitle: 'Belum ada apa-apa di sini',
+    columnName: 'Nama',
+    columnEmail: 'Email',
+    columnRole: 'Peran',
+    columnStatus: 'Status',
+    columnJoined: 'Bergabung',
+    columnCreator: 'Kreator',
+    columnUsername: 'Nama pengguna',
+    columnAssets: 'Aset',
+    columnFollowers: 'Pengikut',
+    columnTitle: 'Judul',
+    columnAsset: 'Aset',
+    columnCategory: 'Kategori',
+    columnDownloads: 'Unduhan',
+    columnPrice: 'Harga',
+    columnOrder: 'Pesanan',
+    columnLicense: 'Lisensi',
+    columnAmount: 'Jumlah',
+    columnDate: 'Tanggal',
+    columnReporter: 'Pelapor',
+    columnReason: 'Alasan',
+    columnPayout: 'Pencairan dana',
+    columnRevenue: 'Pendapatan',
+    columnVersion: 'Versi',
+    columnDownloaded: 'Diunduh',
+    selectedCount: '{{count}} dipilih',
+    clearSelection: 'Batalkan pilihan',
+    selectAll: 'Pilih semua baris di halaman ini',
+    selectRow: 'Pilih baris',
+    comfortable: 'Kepadatan nyaman',
+    compact: 'Kepadatan ringkas',
+  },
+
+  account: {
+    recentPurchases: 'Pembelian terbaru',
+    noPurchasesTitle: 'Belum ada pembelian',
+    noPurchasesDescription: 'Aset yang Anda beli akan muncul di sini beserta detail pesanan dan lisensinya.',
+    redownload: 'Unduh ulang',
+    noDownloadsTitle: 'Belum ada unduhan',
+    noDownloadsDescription: 'File dari pembelian Anda akan muncul di sini, dapat diunduh ulang kapan saja.',
+    noCollectionsTitle: 'Belum ada koleksi',
+    noCollectionsDescription: 'Buat koleksi dari halaman aset mana pun untuk mulai mengatur favorit Anda menjadi moodboard atau proyek.',
+    noNotificationsTitle: 'Tidak ada notifikasi',
+    noNotificationsDescription: 'Konfirmasi pembelian, pencairan dana, dan pembaruan moderasi akan muncul di sini.',
+  },
+
+  collection: {
+    private: 'Privat',
+    public: 'Publik',
+  },
+
+  metrics: {
+    vsLastPeriod: '{{delta}}% dari periode sebelumnya',
+  },
+
+  adminDashboard: {
+    gmv: 'GMV (30 hari)',
+    orders: 'Pesanan (30 hari)',
+    activeUsers: 'Pengguna aktif',
+    publishedAssets: 'Aset dipublikasikan',
+    gmvChartTitle: 'Nilai transaksi kotor',
+    gmvChartSubtitle: '8 bulan terakhir, seluruh platform',
+    needsAttentionTitle: 'Perlu perhatian',
+    moderationQueueCount_one: '{{count}} aset menunggu tinjauan',
+    moderationQueueCount_other: '{{count}} aset menunggu tinjauan',
+    openReportsCount_one: '{{count}} laporan terbuka',
+    openReportsCount_other: '{{count}} laporan terbuka',
+  },
+
+  adminUsers: {
+    emptyTitle: 'Tidak ada pengguna ditemukan',
+    activate: 'Aktifkan',
+    suspend: 'Tangguhkan',
+  },
+
+  adminCreators: {
+    verified: 'Terverifikasi',
+    unverified: 'Belum terverifikasi',
+  },
+
+  adminModeration: {
+    queueClearTitle: 'Antrean sudah bersih',
+    queueClearDescription: 'Tidak ada aset yang sedang menunggu tinjauan moderasi.',
+    submittedBy: 'oleh {{creator}} · dikirim {{date}}',
+  },
+
+  adminReports: {
+    emptyTitle: 'Tidak ada laporan',
+    emptyDescription: 'Laporan konten yang dikirim pengguna akan muncul di sini.',
+  },
+
+  creatorHome: {
+    revenue: 'Pendapatan (30 hari)',
+    downloads: 'Unduhan (30 hari)',
+    views: 'Dilihat (30 hari)',
+    favorites: 'Favorit (30 hari)',
+    earningsChartTitle: 'Tren penghasilan',
+    earningsChartSubtitle: '8 bulan terakhir',
+    topAssetsTitle: 'Aset teratas Anda',
+    topAssetsEmpty: 'Publikasikan aset pertama Anda untuk melihat performanya di sini.',
+    nextPayoutTitle: 'Saldo tersedia',
+    nextPayoutAmount: '{{amount}} tersedia sekarang',
+    nextPayoutDate: 'Dicairkan pada {{date}}',
+    viewEarnings: 'Lihat penghasilan',
+  },
+
+  creatorAssets: {
+    uploadNew: 'Unggah baru',
+    emptyTitle: 'Belum ada aset dipublikasikan',
+    emptyDescription: 'Unggah aset pertama Anda untuk mulai menghasilkan dari karya Anda.',
+  },
+
+  creatorAnalytics: {
+    totalViews: 'Total dilihat',
+    clickThroughRate: 'Rasio klik-tayang',
+    conversionRate: 'Rasio konversi',
+    viewsChartTitle: 'Tayangan dari waktu ke waktu',
+    viewsChartSubtitle: '8 minggu terakhir',
+    conversionChartTitle: 'Rasio konversi',
+    conversionChartSubtitle: 'Persentase tayangan yang berujung pembelian',
+  },
+
+  creatorEarnings: {
+    availableBalance: 'Saldo tersedia',
+    pendingBalance: 'Saldo tertunda',
+    lifetimeEarnings: 'Total penghasilan',
+    trendTitle: 'Tren penghasilan',
+    nextPayout: 'Pencairan dana berikutnya pada {{date}}',
+    revenueByAssetTitle: 'Pendapatan per aset',
+  },
+
+  creatorPayouts: {
+    emptyTitle: 'Belum ada pencairan dana',
+    emptyDescription: 'Setelah saldo Anda positif, pencairan dana akan muncul di sini sesuai siklus bulanan Anda.',
+  },
+
+  creatorUpload: {
+    title: 'Unggah aset',
+    description: 'File diproses secara otomatis — pratinjau, metadata, dan pengiriman moderasi berjalan tanpa menghambat Anda.',
+    dropHint: 'Seret & lepas file, atau',
+    browse: 'jelajahi',
+    supportedFormats: 'Mendukung file besar dengan unggahan multi-file yang dapat dilanjutkan. JPG, PNG, TIFF, MP4, WAV, SVG, AI, OBJ, dan lainnya.',
+    cancelUpload: 'Batalkan unggahan',
+    stageUploading: 'Mengunggah',
+    stageProcessing: 'Memproses (membuat pratinjau & mengekstrak metadata)',
+    stageDraft: 'Siap — disimpan sebagai draf',
+  },
+
+  about: {
+    eyebrow: 'Tentang Futaze',
+    title: 'Dibangun untuk orang-orang yang membuat karya',
+    paragraph1: 'Futaze adalah marketplace untuk aset kreatif — fotografi, footage, ilustrasi, audio, dan desain — dibangun di atas premis sederhana: orang-orang yang membuat karya harus bisa menghidupi diri dari karyanya.',
+    paragraph2: 'Kami memulai Futaze karena terlalu banyak marketplace yang memperlakukan karya kreatif sebagai inventaris. Kami membangun platform ini berdasarkan lisensi yang transparan, bagi hasil yang adil, dan pengalaman penemuan yang menghargai baik orang yang mencari maupun orang yang membuat apa yang mereka temukan. Setiap aset di Futaze ditinjau sebelum dipublikasikan, setiap lisensi ditulis dalam bahasa yang mudah dipahami, dan setiap kreator dapat melihat persis berapa yang telah mereka hasilkan dan kapan akan dibayar.',
+    paragraph3: 'Saat ini, ribuan kreator independen mempublikasikan karya di Futaze, dan tim dari berbagai ukuran — dari freelancer solo hingga tim brand enterprise — melisensikan karya mereka untuk kampanye, produk, dan cerita yang disampaikan ke seluruh dunia.',
+  },
+
+  contact: {
+    eyebrow: 'Kontak',
+    title: 'Hubungi kami',
+    description: 'Pertanyaan tentang lisensi, pesanan, atau kerja sama dengan kami — kami biasanya merespons dalam satu hari kerja.',
+    channelEmailTitle: 'Dukungan email',
+    channelEmailDetail: 'support@futaze.example',
+    channelChatTitle: 'Live chat',
+    channelChatDetail: 'Tersedia hari kerja, 9.00–18.00',
+    channelEnterpriseTitle: 'Penjualan enterprise',
+    channelEnterpriseDetail: 'sales@futaze.example',
+    fieldName: 'Nama',
+    fieldSubject: 'Subjek',
+    fieldMessage: 'Pesan',
+    send: 'Kirim pesan',
+    sentTitle: 'Pesan terkirim',
+    sentDescription: 'Kami akan segera menghubungi Anda kembali.',
+  },
+
+  legal: {
+    termsTitle: 'Syarat Layanan',
+    termsUpdated: 'Terakhir diperbarui September 2025',
+    termsBody: [
+      'Dengan menggunakan Futaze, Anda setuju untuk melisensikan (bukan membeli secara penuh) aset digital yang tersedia di platform, sesuai dengan tingkat lisensi yang dipilih saat checkout.',
+      'Kreator tetap memegang hak cipta atas karyanya. Membeli lisensi memberikan hak penggunaan sebagaimana dijelaskan untuk tingkat tersebut — tidak mengalihkan kepemilikan.',
+      'Penyalahgunaan aset yang diunduh di luar ketentuan lisensi yang diberikan dapat mengakibatkan pencabutan lisensi dan penangguhan akun.',
+    ],
+    privacyTitle: 'Kebijakan Privasi',
+    privacyUpdated: 'Terakhir diperbarui September 2025',
+    privacyBody: [
+      'Kami mengumpulkan informasi yang diperlukan untuk mengoperasikan akun Anda, memproses pembayaran, dan mengirimkan unduhan berlisensi dengan aman.',
+      'Kami tidak pernah menjual data pribadi Anda. Data analitik digunakan secara agregat untuk meningkatkan relevansi pencarian dan performa platform.',
+      'Anda dapat meminta salinan atau penghapusan data Anda kapan saja dari Akun → Pengaturan.',
+    ],
+  },
+
+  faq: {
+    eyebrow: 'FAQ',
+    title: 'Pertanyaan yang sering diajukan',
+    items: [
+      { q: 'Apa yang bisa saya lakukan dengan lisensi Komersial?', a: 'Lisensi Komersial mencakup sebagian besar penggunaan klien dan bisnis — web, media sosial, dan cetak — untuk satu produk akhir, hingga 500.000 impresi. Lihat rincian lengkapnya di halaman Harga.' },
+      { q: 'Bolehkah saya menjual kembali atau mendistribusikan ulang aset yang saya unduh?', a: 'Tidak, di bawah lisensi Personal atau Komersial. Jika Anda memerlukan hak merchandise atau penjualan kembali, pilih lisensi Extended, yang dibuat khusus untuk itu.' },
+      { q: 'Bagaimana cara kerja pencairan dana kreator?', a: 'Kreator mendapat bagi hasil dari setiap penjualan karyanya yang selesai dan tidak dikembalikan, terlihat secara real-time dari dasbor mereka. Pencairan dana berjalan bulanan ke metode pencairan dana yang terhubung.' },
+      { q: 'Apa yang terjadi jika saya mengembalikan pesanan?', a: 'Pengembalian dana membatalkan otorisasi unduhan di masa depan untuk item tersebut, tetapi apa pun yang sudah diunduh tetap dapat digunakan sesuai ketentuan yang telah diberikan — kami tidak mencabut karya yang sudah digunakan.' },
+      { q: 'Bagaimana konten saya dimoderasi sebagai kreator?', a: 'Setiap unggahan melewati tinjauan sebelum dipublikasikan. Anda dapat memantau statusnya — draf, sedang ditinjau, disetujui, atau dipublikasikan — dari dasbor kreator Anda kapan saja.' },
+    ],
+  },
+
   download: {
     default: 'Unduh',
     authorizing: 'Mengotorisasi…',
@@ -442,6 +689,9 @@ export default {
   checkout: {
     title: 'Checkout',
     paymentDetails: 'Detail pembayaran',
+    cardNumberPlaceholder: 'Nomor kartu',
+    expiryPlaceholder: 'BB / TT',
+    cvcPlaceholder: 'CVC',
     demoNotice: 'Ini adalah checkout demo — tidak ada pembayaran yang sungguh diproses.',
     couponPlaceholder: 'Kode kupon',
     apply: 'Terapkan',

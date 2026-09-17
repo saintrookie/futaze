@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useMemo, useState } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import * as TooltipPrimitive from '@radix-ui/react-tooltip';
+import { LazyMotion, domAnimation } from 'framer-motion';
 import { LocaleProvider } from '@shared/i18n/LocaleProvider';
 
 const queryClient = new QueryClient({
@@ -41,7 +42,11 @@ export function AppProviders({ children }) {
     <QueryClientProvider client={queryClient}>
       <LocaleProvider>
         <ThemeProvider>
-          <TooltipPrimitive.Provider delayDuration={200}>{children}</TooltipPrimitive.Provider>
+          <TooltipPrimitive.Provider delayDuration={200}>
+            <LazyMotion features={domAnimation} strict>
+              {children}
+            </LazyMotion>
+          </TooltipPrimitive.Provider>
         </ThemeProvider>
       </LocaleProvider>
     </QueryClientProvider>

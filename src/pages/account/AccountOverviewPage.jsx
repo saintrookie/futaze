@@ -1,22 +1,24 @@
 import { Link } from 'react-router-dom';
 import { Receipt, Download, Heart, FolderHeart } from 'lucide-react';
 import { Grid, Stack } from '@shared/ui/primitives/Layout';
-import { Heading, Text } from '@shared/ui/atoms/Typography';
+import { Heading, Text, Price } from '@shared/ui/atoms/Typography';
 import { Avatar } from '@shared/ui/atoms/Avatar';
 import { Separator } from '@shared/ui/atoms/Separator';
 import { useSession } from '@entities/user';
 import { ORDERS, DOWNLOADS } from '@entities/order';
 import { useFavoritesStore } from '@features/favorite-asset';
+import { useI18n } from '@shared/i18n/LocaleProvider';
 
 export default function AccountOverviewPage() {
+  const { t } = useI18n();
   const { user } = useSession();
   const favoriteCount = useFavoritesStore((s) => s.ids.length);
 
   const stats = [
-    { label: 'Purchases', value: ORDERS.length, icon: Receipt, to: '/account/purchases' },
-    { label: 'Downloads', value: DOWNLOADS.length, icon: Download, to: '/account/downloads' },
-    { label: 'Favorites', value: favoriteCount, icon: Heart, to: '/account/favorites' },
-    { label: 'Collections', value: 3, icon: FolderHeart, to: '/account/collections' },
+    { label: t('accountNav.purchases'), value: ORDERS.length, icon: Receipt, to: '/account/purchases' },
+    { label: t('accountNav.downloads'), value: DOWNLOADS.length, icon: Download, to: '/account/downloads' },
+    { label: t('accountNav.favorites'), value: favoriteCount, icon: Heart, to: '/account/favorites' },
+    { label: t('accountNav.collections'), value: 3, icon: FolderHeart, to: '/account/collections' },
   ];
 
   return (
@@ -42,7 +44,7 @@ export default function AccountOverviewPage() {
 
       <div>
         <Heading level="h4" as="h2" className="mb-4">
-          Recent purchases
+          {t('account.recentPurchases')}
         </Heading>
         <div className="rounded-xl border border-border bg-surface-elevated">
           {ORDERS.slice(0, 4).map((o, i) => (
@@ -54,9 +56,7 @@ export default function AccountOverviewPage() {
                   <p className="truncate text-sm font-medium text-foreground">{o.asset.title}</p>
                   <p className="text-xs text-muted">{o.purchasedAt}</p>
                 </div>
-                <Text size="sm" className="font-medium">
-                  ${o.amount.toFixed(2)}
-                </Text>
+                <Price value={o.amount} size="sm" />
               </div>
             </div>
           ))}

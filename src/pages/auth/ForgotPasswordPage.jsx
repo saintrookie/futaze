@@ -44,7 +44,7 @@ export default function ForgotPasswordPage() {
       >
         <Stack gap="lg">
           <Field label={t('auth.fieldEmail')} required>
-            {(id) => <Input id={id} type="email" required placeholder="you@studio.com" />}
+            {(id) => <Input id={id} type="email" required placeholder={t('auth.emailPlaceholder')} />}
           </Field>
           <Button type="submit" variant="accent" size="lg" className="w-full">
             {t('auth.sendResetLink')}

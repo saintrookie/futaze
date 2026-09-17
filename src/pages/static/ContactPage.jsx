@@ -5,28 +5,29 @@ import { Heading, Text } from '@shared/ui/atoms/Typography';
 import { Field, Input, Textarea } from '@shared/ui/atoms/FormControls';
 import { Button } from '@shared/ui/atoms/Button';
 import { CheckCircle2 } from 'lucide-react';
-
-const CHANNELS = [
-  { icon: Mail, title: 'Email support', detail: 'support@futaze.example' },
-  { icon: MessageCircle, title: 'Live chat', detail: 'Available weekdays, 9am–6pm' },
-  { icon: Building2, title: 'Enterprise sales', detail: 'sales@futaze.example' },
-];
+import { useI18n } from '@shared/i18n/LocaleProvider';
 
 export default function ContactPage() {
+  const { t } = useI18n();
   const [sent, setSent] = useState(false);
+  const channels = [
+    { icon: Mail, title: t('contact.channelEmailTitle'), detail: t('contact.channelEmailDetail') },
+    { icon: MessageCircle, title: t('contact.channelChatTitle'), detail: t('contact.channelChatDetail') },
+    { icon: Building2, title: t('contact.channelEnterpriseTitle'), detail: t('contact.channelEnterpriseDetail') },
+  ];
   return (
     <Container className="py-4xl">
       <Grid cols="grid-cols-1 lg:grid-cols-[1fr_1.2fr]" gap="2xl">
         <div>
           <Text size="caption" className="mb-3 text-accent">
-            Contact
+            {t('contact.eyebrow')}
           </Text>
-          <Heading level="h1">Talk to us</Heading>
+          <Heading level="h1">{t('contact.title')}</Heading>
           <Text size="base" muted className="mt-4 max-w-sm">
-            Questions about licensing, an order, or partnering with us — we typically respond within one business day.
+            {t('contact.description')}
           </Text>
           <Stack gap="lg" className="mt-8">
-            {CHANNELS.map((c) => (
+            {channels.map((c) => (
               <div key={c.title} className="flex items-start gap-3">
                 <span className="flex size-10 items-center justify-center rounded-full bg-surface text-muted">
                   <c.icon className="size-4" />
@@ -45,10 +46,10 @@ export default function ContactPage() {
             <div className="flex flex-col items-center py-10 text-center">
               <CheckCircle2 className="size-10 text-success" />
               <Heading level="h4" as="h2" className="mt-4">
-                Message sent
+                {t('contact.sentTitle')}
               </Heading>
               <Text size="sm" muted className="mt-1.5">
-                We'll get back to you shortly.
+                {t('contact.sentDescription')}
               </Text>
             </div>
           ) : (
@@ -60,21 +61,21 @@ export default function ContactPage() {
             >
               <Stack gap="lg">
                 <Grid cols="grid-cols-1 sm:grid-cols-2" gap="md">
-                  <Field label="Name" required>
+                  <Field label={t('contact.fieldName')} required>
                     {(id) => <Input id={id} required />}
                   </Field>
-                  <Field label="Email" required>
+                  <Field label={t('auth.fieldEmail')} required>
                     {(id) => <Input id={id} type="email" required />}
                   </Field>
                 </Grid>
-                <Field label="Subject" required>
+                <Field label={t('contact.fieldSubject')} required>
                   {(id) => <Input id={id} required />}
                 </Field>
-                <Field label="Message" required>
+                <Field label={t('contact.fieldMessage')} required>
                   {(id) => <Textarea id={id} rows={5} required />}
                 </Field>
                 <Button type="submit" variant="accent" size="lg">
-                  Send message
+                  {t('contact.send')}
                 </Button>
               </Stack>
             </form>

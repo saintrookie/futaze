@@ -2,15 +2,17 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { UploadCloud, FileImage, CheckCircle2, X } from 'lucide-react';
 import { cn } from '@shared/lib/cn';
 import { Text } from '@shared/ui/atoms/Typography';
+import { useI18n } from '@shared/i18n/LocaleProvider';
 
 const STAGES = ['UPLOADING', 'PROCESSING', 'DRAFT'];
-const STAGE_LABEL = {
-  UPLOADING: 'Uploading',
-  PROCESSING: 'Processing (generating previews & extracting metadata)',
-  DRAFT: 'Ready — saved as draft',
+const STAGE_LABEL_KEY = {
+  UPLOADING: 'creatorUpload.stageUploading',
+  PROCESSING: 'creatorUpload.stageProcessing',
+  DRAFT: 'creatorUpload.stageDraft',
 };
 
 function FileRow({ file, onRemove }) {
+  const { t } = useI18n();
   const [stageIndex, setStageIndex] = useState(0);
   const [progress, setProgress] = useState(0);
   const stage = STAGES[stageIndex];
@@ -50,13 +52,13 @@ function FileRow({ file, onRemove }) {
           {stage === 'DRAFT' ? (
             <CheckCircle2 className="size-4 shrink-0 text-success" />
           ) : (
-            <button type="button" onClick={onRemove} aria-label="Cancel upload" className="shrink-0 text-muted hover:text-foreground">
+            <button type="button" onClick={onRemove} aria-label={t('creatorUpload.cancelUpload')} className="shrink-0 text-muted hover:text-foreground">
               <X className="size-4" />
             </button>
           )}
         </div>
         <Text size="xs" muted className="mt-0.5">
-          {STAGE_LABEL[stage]}
+          {t(STAGE_LABEL_KEY[stage])}
         </Text>
         {stage === 'UPLOADING' && (
           <div className="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-surface">
@@ -77,6 +79,7 @@ function FileRow({ file, onRemove }) {
 }
 
 export function UploadDropzone() {
+  const { t } = useI18n();
   const [files, setFiles] = useState([]);
   const [dragging, setDragging] = useState(false);
   const inputRef = useRef(null);
@@ -109,13 +112,13 @@ export function UploadDropzone() {
         </span>
         <div>
           <Text size="base" className="font-medium">
-            Drag & drop files, or{' '}
+            {t('creatorUpload.dropHint')}{' '}
             <button type="button" onClick={() => inputRef.current?.click()} className="text-accent underline underline-offset-2">
-              browse
+              {t('creatorUpload.browse')}
             </button>
           </Text>
           <Text size="xs" muted className="mt-1">
-            Supports large files with resumable, multi-file upload. JPG, PNG, TIFF, MP4, WAV, SVG, AI, OBJ, and more.
+            {t('creatorUpload.supportedFormats')}
           </Text>
         </div>
         <input

@@ -1,10 +1,13 @@
 import { Star } from 'lucide-react';
+import { useI18n } from '@shared/i18n/LocaleProvider';
 import { cn } from '@shared/lib/cn';
 
 export function RatingDisplay({ value = 0, count, size = 'sm', showValue = true }) {
-  const dims = { xs: 'size-3', sm: 'size-3.5', md: 'size-4' };
+  const { t } = useI18n();
+  const dims = { xs: 'size-3', sm: 'size-3.5', md: 'size-4', lg: 'size-5' };
+  const label = count ? t('asset.ratedOutOfWithCount', { value, count }) : t('asset.ratedOutOf', { value });
   return (
-    <span className="inline-flex items-center gap-1.5" aria-label={`Rated ${value} out of 5${count ? ` from ${count} reviews` : ''}`}>
+    <span className="inline-flex items-center gap-1.5" aria-label={label}>
       <span className="flex items-center gap-0.5" aria-hidden>
         {Array.from({ length: 5 }).map((_, i) => (
           <Star

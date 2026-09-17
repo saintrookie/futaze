@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { Check, FileType, Ruler, Clock, Tag as TagIcon } from 'lucide-react';
@@ -21,18 +22,24 @@ import { getReviewsForAsset } from '@entities/review/model/mock';
 import { ReviewItem } from '@entities/review/ui/ReviewItem';
 import { BuyPanel } from '@features/purchase-asset';
 import { DownloadButton } from '@features/download-asset';
+import { useRecentlyViewed } from '@features/recently-viewed';
 import { NotFoundPage } from '@pages/not-found/NotFoundPage';
 import { useI18n } from '@shared/i18n/LocaleProvider';
 
 export default function AssetDetailPage() {
   const { slug } = useParams();
   const { t, formatNumber } = useI18n();
+  const { recordView } = useRecentlyViewed();
   const { data: rawAsset, isLoading, isError, refetch } = useQuery({
     queryKey: ['asset', slug],
     queryFn: () => fetchAssetBySlug(slug),
     retry: false,
   });
   const asset = useLocalizedAsset(rawAsset);
+
+  useEffect(() => {
+    if (asset?.id) recordView(asset.id);
+  }, [asset?.id, recordView]);
 
   if (isLoading) {
     return (

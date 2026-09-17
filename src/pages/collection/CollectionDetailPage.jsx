@@ -5,8 +5,10 @@ import { Heading, Text } from '@shared/ui/atoms/Typography';
 import { AssetGrid } from '@widgets/asset-grid/AssetGrid';
 import { COLLECTIONS, getCollectionAssets } from '@entities/collection';
 import { NotFoundPage } from '@pages/not-found/NotFoundPage';
+import { useI18n } from '@shared/i18n/LocaleProvider';
 
 export default function CollectionDetailPage() {
+  const { t } = useI18n();
   const { slug } = useParams();
   const collection = COLLECTIONS.find((c) => c.slug === slug);
   if (!collection) return <NotFoundPage />;
@@ -20,7 +22,7 @@ export default function CollectionDetailPage() {
         </Heading>
         <span className="flex items-center gap-1 text-sm text-muted">
           {collection.visibility === 'private' ? <Lock className="size-3.5" /> : <Globe2 className="size-3.5" />}
-          {collection.visibility}
+          {collection.visibility === 'private' ? t('collection.private') : t('collection.public')}
         </span>
       </div>
       {collection.description && (

@@ -1,29 +1,13 @@
 import { Container } from '@shared/ui/primitives/Layout';
 import { Heading, Text } from '@shared/ui/atoms/Typography';
-
-const SECTIONS = {
-  terms: {
-    title: 'Terms of Service',
-    updated: 'Last updated September 2025',
-    body: [
-      'By using Futaze, you agree to license (not purchase outright) the digital assets available on the platform, subject to the license tier selected at checkout.',
-      'Creators retain copyright of their work. Purchasing a license grants usage rights as described for that tier — it does not transfer ownership.',
-      'Misuse of downloaded assets outside the granted license terms may result in license revocation and account suspension.',
-    ],
-  },
-  privacy: {
-    title: 'Privacy Policy',
-    updated: 'Last updated September 2025',
-    body: [
-      'We collect the information necessary to operate your account, process payments, and deliver licensed downloads securely.',
-      'We never sell your personal data. Analytics events are used in aggregate to improve search relevance and platform performance.',
-      'You can request a copy or deletion of your data at any time from Account → Settings.',
-    ],
-  },
-};
+import { useI18n } from '@shared/i18n/LocaleProvider';
 
 export default function LegalPage({ type = 'terms' }) {
-  const section = SECTIONS[type];
+  const { t } = useI18n();
+  const section =
+    type === 'privacy'
+      ? { title: t('legal.privacyTitle'), updated: t('legal.privacyUpdated'), body: t('legal.privacyBody') }
+      : { title: t('legal.termsTitle'), updated: t('legal.termsUpdated'), body: t('legal.termsBody') };
   return (
     <Container className="py-4xl">
       <div className="mx-auto max-w-2xl">

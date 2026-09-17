@@ -76,10 +76,10 @@ export default function CheckoutPage() {
               {t('checkout.paymentDetails')}
             </Heading>
             <Stack gap="md">
-              <Input placeholder="Card number" />
+              <Input placeholder={t('checkout.cardNumberPlaceholder')} />
               <Grid cols="grid-cols-2" gap="md">
-                <Input placeholder="MM / YY" />
-                <Input placeholder="CVC" />
+                <Input placeholder={t('checkout.expiryPlaceholder')} />
+                <Input placeholder={t('checkout.cvcPlaceholder')} />
               </Grid>
             </Stack>
             <Text size="xs" muted className="mt-3">

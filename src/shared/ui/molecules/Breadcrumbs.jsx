@@ -1,9 +1,11 @@
 import { ChevronRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useI18n } from '@shared/i18n/LocaleProvider';
 
 export function Breadcrumbs({ items = [] }) {
+  const { t } = useI18n();
   return (
-    <nav aria-label="Breadcrumb">
+    <nav aria-label={t('common.breadcrumb')}>
       <ol className="flex flex-wrap items-center gap-1.5 text-sm text-muted">
         {items.map((item, i) => {
           const last = i === items.length - 1;

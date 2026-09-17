@@ -1,8 +1,9 @@
+import { useState } from 'react';
 import { useQuery, keepPreviousData } from '@tanstack/react-query';
-import { SlidersHorizontal, X } from 'lucide-react';
+import { SlidersHorizontal, X, LayoutGrid, List } from 'lucide-react';
 import { Container } from '@shared/ui/primitives/Layout';
 import { Select } from '@shared/ui/atoms/FormControls';
-import { Button } from '@shared/ui/atoms/Button';
+import { Button, IconButton } from '@shared/ui/atoms/Button';
 import { FilterChip } from '@shared/ui/molecules/FilterChip';
 import { Pagination } from '@shared/ui/molecules/Pagination';
 import { Text, Heading } from '@shared/ui/atoms/Typography';
@@ -33,6 +34,7 @@ export function SearchInterface({ title, description, lockedCategory }) {
   const { t } = useI18n();
   const state = useAssetQueryState();
   const { isOpen, open, close } = useDisclosure(false);
+  const [density, setDensity] = useState('grid');
   const filters = {
     category: lockedCategory || state.category,
     license: state.license,
@@ -102,7 +104,7 @@ export function SearchInterface({ title, description, lockedCategory }) {
                 }
               />
             ))}
-            <div className="ml-auto">
+            <div className="ml-auto flex items-center gap-2.5">
               <Select
                 aria-label={t('browse.sortBy')}
                 size="sm"
@@ -115,10 +117,28 @@ export function SearchInterface({ title, description, lockedCategory }) {
                   </option>
                 ))}
               </Select>
+              <div className="flex items-center gap-0.5 rounded-md border border-border p-0.5">
+                <IconButton
+                  label={t('browse.gridView')}
+                  size="sm"
+                  variant={density === 'grid' ? 'secondary' : 'ghost'}
+                  onClick={() => setDensity('grid')}
+                >
+                  <LayoutGrid />
+                </IconButton>
+                <IconButton
+                  label={t('browse.listView')}
+                  size="sm"
+                  variant={density === 'list' ? 'secondary' : 'ghost'}
+                  onClick={() => setDensity('list')}
+                >
+                  <List />
+                </IconButton>
+              </div>
             </div>
           </div>
 
-          <AssetGrid assets={data?.items} loading={isLoading} error={isError} onRetry={refetch} />
+          <AssetGrid assets={data?.items} loading={isLoading} error={isError} onRetry={refetch} density={density} />
 
           {data && data.totalPages > 1 && (
             <div className="mt-10">

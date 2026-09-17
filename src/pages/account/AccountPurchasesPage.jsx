@@ -2,8 +2,10 @@ import { Badge } from '@shared/ui/atoms/Badge';
 import { DataTable } from '@widgets/data-table/DataTable';
 import { ORDERS } from '@entities/order';
 import { getLicense } from '@entities/license/model/licenses';
+import { useI18n } from '@shared/i18n/LocaleProvider';
 
 export default function AccountPurchasesPage() {
+  const { t } = useI18n();
   const rows = ORDERS.map((o) => ({
     id: o.id,
     order: o.id,
@@ -18,20 +20,20 @@ export default function AccountPurchasesPage() {
     <DataTable
       searchKeys={['title', 'order']}
       columns={[
-        { key: 'order', label: 'Order' },
-        { key: 'title', label: 'Asset' },
-        { key: 'license', label: 'License' },
-        { key: 'amount', label: 'Amount' },
+        { key: 'order', label: t('table.columnOrder') },
+        { key: 'title', label: t('table.columnAsset') },
+        { key: 'license', label: t('table.columnLicense') },
+        { key: 'amount', label: t('table.columnAmount') },
         {
           key: 'status',
-          label: 'Status',
+          label: t('table.columnStatus'),
           render: (row) => <Badge variant={row.status === 'completed' ? 'success' : 'danger'}>{row.status}</Badge>,
         },
-        { key: 'date', label: 'Date' },
+        { key: 'date', label: t('table.columnDate') },
       ]}
       rows={rows}
-      emptyTitle="No purchases yet"
-      emptyDescription="Assets you buy will show up here with their order details and license."
+      emptyTitle={t('account.noPurchasesTitle')}
+      emptyDescription={t('account.noPurchasesDescription')}
     />
   );
 }
